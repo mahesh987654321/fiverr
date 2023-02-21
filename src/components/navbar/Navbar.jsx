@@ -1,8 +1,21 @@
-import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Link, useLocation } from "react-router-dom";
 import "./navbar.scss";
 const Navbar = () => {
+  const { pathname } = useLocation();
+  const [active, setActive] = useState(false);
+  const [open, setOpen] = useState(false);
+  const isActive = () => {
+    window.scrollY > 0 ? setActive(true) : setActive(false);
+  };
+  useEffect(() => {
+    window.addEventListener("scroll", isActive);
+    return () => {
+      window.addEventListener("scroll", isActive);
+    };
+  });
   return (
-    <div className="navbar">
+    <div className={active || pathname !== "/" ? "navbar active" : "navbar"}>
       <div className="container">
         <div className="logo">
           <Link className="link" to="/">
@@ -19,11 +32,41 @@ const Navbar = () => {
           <button>Join</button>
         </div>
       </div>
-      <hr />
-      <div className="menu">
-        <span>Test1</span>
-        <span>Test2</span>
-      </div>
+      {(active || pathname !== "/") && (
+        <>
+          <hr />
+          <div className="menu">
+            <Link className="link menuLink" to="/">
+              Graphics & Design
+            </Link>
+            <Link className="link menuLink" to="/">
+              Video & Animation
+            </Link>
+            <Link className="link menuLink" to="/">
+              Writing & Translation
+            </Link>
+            <Link className="link menuLink" to="/">
+              AI Services
+            </Link>
+            <Link className="link menuLink" to="/">
+              Digital Marketing
+            </Link>
+            <Link className="link menuLink" to="/">
+              Music & Audio
+            </Link>
+            <Link className="link menuLink" to="/">
+              Programming & Tech
+            </Link>
+            <Link className="link menuLink" to="/">
+              Business
+            </Link>
+            <Link className="link menuLink" to="/">
+              Lifestyle
+            </Link>
+          </div>
+          <hr />
+        </>
+      )}
     </div>
   );
 };

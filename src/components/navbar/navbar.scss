@@ -8,6 +8,15 @@
   //   top: 0;
   //   z-index: 999;
   //   transition: 0.5s all ease;
+  &.active {
+    background-color: white;
+    color: black;
+  }
+  //   button {
+  //     background-color: white !important;
+  //     color: #1dbf73 !important;
+  //     border: 1px solid #1dbf73 !important;
+  //   }
   .container {
     width: 1400px;
     display: flex;
